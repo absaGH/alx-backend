@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
-from typing import Tuple
-'''module to find index of pagination'''
+"""
+ module to return paginaged data
+"""
+from typing import List, Tuple, Union
 
 
 def index_range(page: int, page_size: int) -> Tuple[int, int]:
