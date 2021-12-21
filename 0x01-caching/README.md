@@ -1,0 +1,3 @@
+# Caching
+The main purpose of this project is to explore the concept of caching.The
+concepts explor different caching policies like FIFO, LIFO, LRU, etc...
