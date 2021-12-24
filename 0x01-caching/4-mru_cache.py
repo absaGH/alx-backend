@@ -24,10 +24,14 @@ class MRUCache(BaseCaching):
                 self.keydict[key] = self.keydict[MRUkey] + 1
             elif len(self.cache_data) >= BaseCaching.MAX_ITEMS:
                 removed = max(self.keydict, key=self.keydict.get)
+                removed_val = self.keydict[removed]
                 self.cache_data.pop(removed)
                 self.keydict.pop(removed)
-                MRUkey = max(self.keydict, key=self.keydict.get)
-                self.keydict[key] = self.keydict[MRUkey] + 1
+                if not bool(self.keydict):
+                    self.keydict[key] = removed_val + 1
+                else:
+                    MRUkey = max(self.keydict, key=self.keydict.get)
+                    self.keydict[key] = self.keydict[MRUkey] + 1
                 self.cache_data[key] = item
                 print('DISCARD:', str(removed))
             else:
