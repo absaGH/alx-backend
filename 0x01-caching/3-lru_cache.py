@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
-'''module to create class BasicCache'''
+'''module to create class LRUCache'''
 from base_caching import BaseCaching
 
 
 class LRUCache(BaseCaching):
     '''inherits from BaseCaching and implements
-       put and get methods
+       LRU caching policy
     '''
 
     def __init__(self):
-        '''initialize BasicCache object'''
+        '''initialize LRUCache object'''
         super().__init__()
         self.keydict = {}
 
@@ -24,10 +24,14 @@ class LRUCache(BaseCaching):
                     self.keydict, key=self.keydict.get)] + 1
             elif len(self.cache_data) >= BaseCaching.MAX_ITEMS:
                 removed = min(self.keydict, key=self.keydict.get)
+                removed_val = self.keydict[removed]
                 self.cache_data.pop(removed)
                 self.keydict.pop(removed)
-                self.keydict[key] = self.keydict[max(
-                    self.keydict, key=self.keydict.get)] + 1
+                if not bool(self.keydict):
+                    self.keydict[key] = removed_val + 1
+                else:
+                    self.keydict[key] = self.keydict[max(
+                        self.keydict, key=self.keydict.get)] + 1
                 self.cache_data[key] = item
                 print('DISCARD:', str(removed))
             else:
