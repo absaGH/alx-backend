@@ -24,8 +24,8 @@ app.config.from_object(Config)
 
 @app.route('/')
 def root():
-    """ route to render 3-index.html """
-    return render_template("3-index.html")
+    """ route to render 4-index.html """
+    return render_template("4-index.html")
 
 
 @babel.localeselector
