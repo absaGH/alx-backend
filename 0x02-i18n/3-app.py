@@ -4,14 +4,11 @@ from flask import Flask, render_template, request
 from flask_babel import Babel, gettext
 
 app = Flask(__name__)
-
-""" instantiate the Babel object """
 babel = Babel(app)
 
 
 class Config(object):
-    """ configiguration variable for
-       available languages
+    """ configiguration variable for available languages
     """
     LANGUAGES = ['en', 'fr']
     BABEL_DEFAULT_LOCALE = 'en'
@@ -29,8 +26,7 @@ def root():
 
 @babel.localeselector
 def get_locale():
-    """ return the best match from the supported language
-s """
+    """ return the best match from supported language """
     return request.accept_languages.best_match(app.config
                                                ['LANGUAGES'])
 
