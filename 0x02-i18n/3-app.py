@@ -5,6 +5,7 @@ from flask_babel import Babel, gettext
 
 app = Flask(__name__)
 babel = Babel(app)
+""" Babel object is instantiated using app """
 
 
 class Config(object):
@@ -16,6 +17,7 @@ class Config(object):
 
 
 app.config.from_object(Config)
+""" Config is used to setup app """
 
 
 @app.route('/')
