@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
-""" Basic Babel setup with babel.localeselector decorator
-"""
-from flask import Flask, render_template
-from flask_babel import Babel
+""" Basic Babel setup with babel.localeselector decorator"""
+from flask import Flask, render_template, request
+from flask_babel import Babel, gettext
 
 app = Flask(__name__)
 
