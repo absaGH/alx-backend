@@ -1,38 +1,37 @@
 #!/usr/bin/env python3
-""" Basic Babel setup with babel.localeselector decorator"""
+""" Basic Babel setup,Parametrize templates, Force locale with URL parameter """
 from flask import Flask, render_template, request
 from flask_babel import Babel, gettext
 
 app = Flask(__name__)
 babel = Babel(app)
-""" Babel object is instantiated using app """
+""" instantiate the Babel object """
 
 
 class Config(object):
-    """ configiguration variable for available languages
-    """
+    """ config class """
     LANGUAGES = ['en', 'fr']
     BABEL_DEFAULT_LOCALE = 'en'
     BABEL_DEFAULT_TIMEZONE = 'UTC'
 
 
 app.config.from_object(Config)
-""" Config is used to setup app """
+""" Use that class as config for Flask app """
 
 
 @app.route('/')
 def root():
-    """ route to render 4-index.html """
+    """ basic Flask app """
     return render_template("4-index.html")
 
 
 @babel.localeselector
 def get_locale():
-    """ return the best match from supported language """
-    locLang = request.args.get('locale')
-    suppLang = app.config['LANGUAGES']
-    if locLang in suppLang:
-        return locLang
+    """ to determine the best match with our supported languages """
+    localLang = request.args.get('locale')
+    supportLang = app.config['LANGUAGES']
+    if localLang in supportLang:
+        return localLang
     else:
         return request.accept_languages.best_match(app.config['LANGUAGES'])
 
